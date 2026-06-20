@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salwa M.H — CV</title>
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: radial-gradient(circle at top right, #16120e 0%, #0a0a0a 60%);
+            color: #f3f4f6;
+        }
+        .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Efek Gradasi Emas Mewah */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #f6d365 0%, #fda085 0%, #f3ca65 40%, #b88728 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #f5c062 0%, #b88728 100%);
+        }
+        /* Card Transparan Elegan (Glassmorphism halus) */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(184, 135, 40, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(184, 135, 40, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 30px 60px rgba(184, 135, 40, 0.05);
+        }
+        /* Navigasi Aktif */
+        .nav-active {
+            color: #f5c062 !important;
+            border-bottom: 2px solid #b88728;
+        }
+        .page-section {
+            transition: all 0.5s ease-in-out;
+        }
+        .page-section.hidden {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        .dropdown-menu {
+            display: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+        }
+        .dropdown-menu.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col antialiased">
+
+    <div class="max-w-5xl w-full mx-auto flex flex-col gap-8 flex-grow justify-between">
+        
+        <!-- HEADER / NAVIGATION -->
+        <!-- STREAMING_CHUNK: Setting up navigation links with relative assets -->
+        <header class="w-full px-6 py-4 glass-card rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 sticky top-6 z-50">
+            <div class="flex justify-between items-center w-full md:w-auto">
+                <span class="text-2xl font-semibold tracking-wider font-serif">
+                    S<span class="text-gold-gradient font-serif italic">a</span>lwa
+                </span>
+                
+                <button onclick="toggleMobileMenu()" class="md:hidden text-xs font-semibold tracking-widest text-[#f5c062] border border-[rgba(184,135,40,0.3)] px-4 py-2 rounded-lg bg-black/40 cursor-pointer">
+                    <i class="fa-solid fa-bars mr-1"></i> MENU
+                </button>
+            </div>
+
+            <!-- Nav Items -->
+            <nav id="navMenu" class="hidden md:flex flex-col md:flex-row gap-1 lg:gap-2 font-medium text-xs tracking-widest uppercase items-center w-full md:w-auto mt-4 md:mt-0 border-t border-gray-800 md:border-0 pt-4 md:pt-0">
+                <button onclick="switchPage('beranda')" id="btn-beranda" class="nav-active text-left md:text-center py-2 px-4 text-gray-400 hover:text-white transition-colors cursor-pointer w-full md:w-auto">
+                    Beranda
+                </button>
+                <button onclick="switchPage('profil')" id="btn-profil" class="text-left md:text-center py-2 px-4 text-gray-400 hover:text-white transition-colors cursor-pointer w-full md:w-auto">
+                    Profil Saya
+                </button>
+                <button onclick="switchPage('project')" id="btn-project" class="text-left md:text-center py-2 px-4 text-gray-400 hover:text-white transition-colors cursor-pointer w-full md:w-auto">
+                    Project
+                </button>
+                
+                <!-- Dropdown -->
+                <div class="relative w-full md:w-auto">
+                    <button onclick="toggleDropdown(event)" class="w-full text-left md:text-center py-2 px-4 text-gray-400 hover:text-white transition-colors cursor-pointer flex justify-between items-center gap-2">
+                        <span>Lainnya</span>
+                        <i class="fa-solid fa-chevron-down text-[10px] text-[#f5c062]"></i>
+                    </button>
+                    <div id="dropdownContent" class="dropdown-menu absolute right-0 left-0 md:left-auto mt-3 bg-[#121212] border border-gray-800 rounded-xl p-1.5 shadow-2xl z-50 min-w-[180px]">
+                        <button onclick="switchPage('kontak')" class="w-full text-left p-3 hover:bg-zinc-900 rounded-lg text-gray-300 hover:text-[#f5c062] transition-colors text-[11px] font-medium tracking-wider cursor-pointer uppercase">
+                            <i class="fa-solid fa-phone mr-2 text-[10px]"></i> Hubungi Kontak
+                        </button>
+                        <!-- LINK DOWNLOAD CV DENGAN PENULISAN RELATIF TERSTANDAR HOSTING -->
+                        <a href="SALWA%20MUTIARA%20H%20-%20CV%20CREATIVE.pdf" download class="block w-full text-left p-3 hover:bg-zinc-900 rounded-lg text-gray-300 hover:text-[#f5c062] transition-colors text-[11px] font-medium tracking-wider border-t border-zinc-900 uppercase">
+                            <i class="fa-solid fa-download mr-2 text-[10px]"></i> Download CV
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Social Icons Desktop Only -->
+                <div class="hidden md:flex gap-4 text-sm text-gray-400 border-l border-zinc-800 pl-6 ml-2 py-1">
+                    <a href="https://github.com/mutiarasalwa0205-cell" class="hover:text-[#f5c062] transition-colors"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/salwa-mutiara-hikmah-a2b465417/" class="hover:text-[#f5c062] transition-colors"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://www.instagram.com/s.4wayy?igsh=MWVncWhodDJjbDZkbQ==" class="hover:text-[#f5c062] transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="w-full flex-grow flex items-center py-4">
+            
+            <!-- SECTION: BERANDA -->
+            <!-- STREAMING_CHUNK: Rendering hero area with self-contained profile photo -->
+            <section id="page-beranda" class="page-section w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 order-2 lg:order-1 text-center lg:text-left">
+                    <span class="text-xs font-semibold tracking-[0.3em] uppercase text-[#f5c062] block">Hello, I'm</span>
+                    <h1 class="text-4xl md:text-6xl font-light tracking-tight font-serif leading-none text-white">
+                        Salwa <span class="font-semibold italic text-gold-gradient">Mutiara Hikmah</span>
+                    </h1>
+                    
+                    <!-- EFEK MENGETIK AUTOMATIS -->
+                    <div class="text-xl md:text-2xl font-bold tracking-wide text-gray-200 min-h-[36px]">
+                        <span id="typewriter-text"></span><span class="animate-pulse text-[#f5c062] font-light">|</span>
+                    </div>
+
+                    <p class="text-gray-400 font-light text-sm md:text-base leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        Sedang seru-serunya mendalami dunia <a href="https://id.wikipedia.org/wiki/Rekayasa_perangkat_lunak" target="_blank" class="font-bold underline text-gray-200 hover:text-[#f5c062] transition-colors">Rekayasa Perangkat Lunak</a>. Fokus saya saat ini adalah mengasah logika berpikir lewat baris kode pemrograman untuk membangun tampilan web yang interaktif, rapi, dan fungsional dari dasar.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4 justify-center lg:justify-start">
+                        <!-- LINK DOWNLOAD CV UTAMA -->
+                        <a href="SALWA%20MUTIARA%20H%20-%20CV%20CREATIVE.pdf" download class="px-6 py-3.5 bg-gold-gradient text-neutral-900 text-xs font-semibold uppercase tracking-widest rounded-full shadow-lg shadow-amber-900/20 hover:opacity-90 transition-all cursor-pointer flex items-center gap-2">
+                            Download CV <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                        </a>
+                        <button onclick="switchPage('kontak')" class="px-6 py-3.5 border border-zinc-800 text-gray-300 text-xs font-semibold uppercase tracking-widest rounded-full hover:bg-white/5 transition-all cursor-pointer">
+                            Kontak Saya
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex justify-center order-1 lg:order-2">
+                    <div class="relative group">
+                        <div class="absolute -inset-1.5 bg-gradient-to-tr from-[#b88728] to-[#f5c062] rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-1000"></div>
+                        <div class="w-[260px] md:w-[280px] aspect-[4/5] bg-zinc-900 rounded-2xl p-3 relative glass-card">
+                            <!-- FOTO PROFIL UTAMA -->
+                            <img id="profile-img-1" src="salwa.jpg" alt="Salwa Mutiara" class="w-full h-full object-cover rounded-xl grayscale hover:grayscale-0 transition-all duration-700">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: PROFIL SAYA -->
+            <!-- STREAMING_CHUNK: Setting up professional info and layout blocks -->
+            <section id="page-profil" class="page-section hidden w-full space-y-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="md:col-span-4 flex justify-center md:justify-start">
+                        <div class="p-2 bg-gradient-to-tr from-[#b88728] to-transparent rounded-full">
+                            <div class="w-44 h-44 md:w-48 md:h-48 rounded-full overflow-hidden bg-zinc-900 border-4 border-zinc-950">
+                                <!-- FOTO PROFIL KEDUA -->
+                                <img id="profile-img-2" src="salwa.png" alt="Salwa" class="w-full h-full object-cover grayscale">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-8 space-y-4 text-center md:text-left">
+                        <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-[#f5c062]">A Brief Story</span>
+                        <h2 class="text-3xl font-light font-serif">Tentang Saya</h2>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">
+                            Saya adalah individu yang tertarik pada dunia teknologi dan pengembangan perangkat lunak. Selama menempuh pendidikan, saya telah mengembangkan kemampuan berpikir logis dan pemecahan masalah. Saya mampu bekerja sama dengan baik dalam tim serta memiliki sikap disiplin dan bertanggung jawab. Saya siap terus belajar dan berkembang untuk meningkatkan kompetensi yang dimiliki.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- BIODATA & SKILLS -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6 border-t border-zinc-900">
+                    <div class="space-y-4">
+                        <div class="glass-card p-5 rounded-xl space-y-4">
+                            <h4 class="text-xs font-bold tracking-widest text-[#f5c062] uppercase">Biodata & Domisili</h4>
+                            <div class="space-y-3 text-xs font-light text-gray-400">
+                                <div class="flex items-center gap-3"><i class="fa-solid fa-cake-candles text-[#b88728] w-4 text-center"></i> <span>Sukabumi, 06 Maret 2009</span></div>
+                                <div class="flex items-center gap-3"><i class="fa-solid fa-user-graduate text-[#b88728] w-4 text-center"></i> <span>Pelajar / Student</span></div>
+                                <div class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-[#b88728] w-4 text-center"></i> <span>Sukabumi, Jawa Barat</span></div>
+                            </div>
+                        </div>
+                        <div class="glass-card p-5 rounded-xl space-y-3">
+                            <h4 class="text-xs font-bold tracking-widest text-[#f5c062] uppercase">Minat & Hobi</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-zinc-900 border border-zinc-800 text-[10px] text-gray-300 rounded-full tracking-wider">🏃‍♂️ JOGGING</span>
+                                <span class="px-3 py-1 bg-zinc-900 border border-zinc-800 text-[10px] text-gray-300 rounded-full tracking-wider">☕ CODING NIGHT</span>
+                                <span class="px-3 py-1 bg-zinc-900 border border-zinc-800 text-[10px] text-gray-300 rounded-full tracking-wider">📚 READING</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-4">
+                        <h4 class="text-xs font-bold tracking-widest text-[#f5c062] uppercase">HARD SKILL</h4>
+                        <div class="space-y-3.5">
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">HTML & CSS</span><span class="text-gray-500">90%</span></div>
+                                <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 90%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">JavaScript</span><span class="text-gray-500">80%</span></div>
+                                <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 80%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">PHP & Laravel</span><span class="text-gray-500">85%</span></div>
+                                <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 85%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">C# Programming</span><span class="text-gray-500">85%</span></div>
+                                <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 85%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">Figma</span><span class="text-gray-500">90%</span></div>
+                                <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 90%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-xl space-y-4">
+                        <h4 class="text-xs font-bold tracking-widest text-[#f5c062] uppercase">SOFT SKILL</h4>
+                        <div class="space-y-3.5">
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">Logika & Pemecahan Masalah</span><span class="text-gray-500">85%</span></div>
+                                 <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 85%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">Kerjasama Tim / Kolaborasi</span><span class="text-gray-500">90%</span></div>
+                                 <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 90%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">Disiplin</span><span class="text-gray-500">95%</span></div>
+                                 <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 95%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">Tanggung Jawab</span><span class="text-gray-500">95%</span></div>
+                                 <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 95%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-[11px] mb-1 font-light"><span class="text-gray-300">Mudah Beradaptasi</span><span class="text-gray-500">95%</span></div>
+                                 <div class="w-full bg-zinc-900 h-[3px] rounded-full"><div class="bg-gold-gradient h-[3px] rounded-full" style="width: 95%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIWAYAT PENDIDIKAN -->
+                <div class="glass-card p-6 rounded-xl space-y-6">
+                    <h4 class="text-xs font-bold tracking-widest text-[#f5c062] uppercase">Riwayat Pendidikan</h4>
+                    <div class="relative border-l border-zinc-800 pl-6 ml-2 space-y-6 text-xs">
+                        <div class="relative">
+                            <div class="absolute w-2.5 h-2.5 bg-[#f5c062] rounded-full -left-[31px] top-1 shadow-md shadow-amber-500/50"></div>
+                            <div class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2">
+                                <span class="font-medium text-sm text-gray-200">
+                                    <a href="https://smkn2smi.sch.id/" target="_blank" class="hover:text-[#f5c062] transition-colors">SMK Negeri 2 Sukabumi</a>
+                                    <span class="text-gray-500 text-xs block sm:inline sm:ml-2">(Rekayasa Perangkat Lunak)</span>
+                                </span>
+                                <span class="px-2.5 py-0.5 border border-[#b88728] text-[#f5c062] text-[9px] tracking-widest uppercase rounded">Sekarang</span>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute w-2.5 h-2.5 bg-zinc-700 rounded-full -left-[31px] top-1"></div>
+                            <div class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2">
+                                <a href="https://www.mts-al-manshuriyah.sch.id/" target="_blank" class="font-light text-gray-300 hover:text-[#f5c062] transition-colors">MTSS AL-MANSHURIYAH Sukabumi</a>
+                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">Alumni</span>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute w-2.5 h-2.5 bg-zinc-700 rounded-full -left-[31px] top-1"></div>
+                            <div class="flex flex-col sm:flex-row sm:justify-between items-start sm:items-center gap-2">
+                                <a href="https://data.sekolah-kita.net/sekolah/SDN%20PELITA%20JAYA_261986" target="_blank" class="font-light text-gray-300 hover:text-[#f5c062] transition-colors">SDN Pelita Jaya Sukabumi</a>
+                                <span class="text-gray-500 text-[10px] uppercase tracking-wider">Alumni</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- SECTION: PROJECT -->
+            <section id="page-project" class="page-section hidden w-full space-y-8">
+                <div class="space-y-1">
+                    <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-[#f5c062]">Selected Works</span>
+                    <h2 class="text-3xl font-light font-serif">Arsip Project</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="glass-card p-4 rounded-xl group">
+                        <div class="aspect-video bg-zinc-950 rounded-lg overflow-hidden mb-4 border border-zinc-900 flex items-center justify-center text-zinc-600">
+                            <img src="webSpmb.png" alt="Web App SPMB" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <span class="text-[9px] font-semibold tracking-widest text-[#f5c062] border border-[rgba(184,135,40,0.2)] px-2 py-0.5 rounded bg-amber-500/5">WEB APPLICATION</span>
+                        <h3 class="font-medium text-gray-200 mt-2 text-base">Web App SPMB</h3>
+                    </div>
+                    
+                    <div class="glass-card p-4 rounded-xl group">
+                        <div class="aspect-video bg-zinc-950 rounded-lg overflow-hidden mb-4 border border-zinc-900 flex items-center justify-center text-zinc-600">
+                            <img src="game.png" alt="Game SpaceShooter" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        </div>
+                        <span class="text-[9px] font-semibold tracking-widest text-[#f5c062] border border-[rgba(184,135,40,0.2)] px-2 py-0.5 rounded bg-amber-500/5">WEB GAME</span>
+                        <h3 class="font-medium text-gray-200 mt-2 text-base">Game SpaceShooter</h3>
+                    </div>
+                </div>
+
+                <!-- Eksperimen Kode -->
+                <div class="pt-8 border-t border-zinc-900 space-y-6">
+                    <h3 class="text-xs font-bold tracking-[0.2em] text-gray-400 uppercase">Eksperimen Kode Tambahan</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                        <!-- COLUMN LEFT (1 to 8) -->
+                        <div class="space-y-2">
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">1</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Game Dadu dengan C#</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">2</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Projek Sederhana Kalkulator Rumus Matematika dengan C#</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">3</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Aplikasi Hotel dengan C#</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">4</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Web Sekolah dengan Wordpress</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">5</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Aplikasi Gaji Karyawan dengan C#</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">6</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Perancangan ERD, Use Case, Activity Diagram, dengan Draw.io</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">7</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Website Toko dengan Laravel</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">8</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Website SNBP Mahasiswa dengan Laravel</p>
+                            </div>
+                        </div>
+                        
+                        <!-- COLUMN RIGHT (9 to 15) -->
+                        <!-- STREAMING_CHUNK: Rendering right column list items with golden circles -->
+                        <div class="space-y-2">
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">9</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Game CatchCoin</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">10</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Game MathEscapeMonster</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">11</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Game Lompat Sederhana</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">12</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Aplikasi Pemanggilan Antrian (MultiMedia)</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">13</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Desain Aplikasi dengan Figma</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">14</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat CRUD di Visual Studio 2022, Laravel dan MySQL</p>
+                            </div>
+                            <div class="p-3 glass-card rounded-lg flex items-center gap-3.5 font-light text-gray-300 border border-zinc-800 hover:border-[#f5c062]/30 transition-all">
+                                <span class="w-6 h-6 rounded-full bg-zinc-900 border border-zinc-800 text-[#f5c062] font-mono text-[10px] flex items-center justify-center shrink-0 font-bold">15</span>
+                                <p class="text-zinc-200 tracking-wide font-medium text-[11px]">Membuat Game SpaceShooter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION: KONTAK -->
+            <!-- STREAMING_CHUNK: Arranging contact information links -->
+            <section id="page-kontak" class="page-section hidden w-full space-y-6">
+                <div class="space-y-1">
+                    <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-[#f5c062]">Get in Touch</span>
+                    <h2 class="text-3xl font-light font-serif">Jalur Komunikasi</h2>
+                </div>
+                
+                <div class="max-w-4xl space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+                        <div class="md:col-span-7 p-6 glass-card rounded-xl flex flex-col justify-between min-h-[150px]">
+                            <div class="flex justify-between items-start">
+                                <div class="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+                                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                                </div>
+                                <span class="bg-emerald-500/5 text-emerald-400 text-[9px] font-medium tracking-widest px-2.5 py-1 rounded border border-emerald-500/20 uppercase">Fast Response</span>
+                            </div>
+                            <div class="mt-4">
+                                <span class="block text-[9px] font-semibold text-gray-500 tracking-widest uppercase mb-1">WhatsApp & Telepon</span>
+                                <a href="https://wa.me/6285882366917" target="_blank" class="text-xl md:text-2xl font-light text-gray-200 hover:text-[#f5c062] transition-colors">0858 8236 6917</a>
+                            </div>
+                        </div> 
+
+                        <div class="md:col-span-5 p-6 glass-card rounded-xl flex flex-col justify-between min-h-[150px]">
+                            <div class="w-10 h-10 rounded-lg bg-amber-500/10 flex items-center justify-center text-[#f5c062] border border-amber-500/20">
+                                <i class="fa-solid fa-envelope text-base"></i>
+                            </div>
+                            <div class="mt-4">
+                                <span class="block text-[9px] font-semibold text-gray-500 tracking-widest uppercase mb-1">Email Resmi</span>
+                                <a href="mailto:mutiarasalwa0205@gmail.com" class="text-xs font-light text-gray-300 hover:text-[#f5c062] transition-colors break-all">mutiarasalwa0205@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SOCIAL MEDIA GRID -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/s.4wayy?igsh=MWVncWhodDJjbDZkbQ==" target="_blank" class="glass-card p-5 rounded-xl flex items-center gap-4 hover:border-pink-500/40 transition-all group">
+                            <div class="w-10 h-10 rounded-lg bg-pink-500/10 flex items-center justify-center text-pink-400 border border-pink-500/20 group-hover:bg-pink-500/20 transition-all shrink-0">
+                                <i class="fa-brands fa-instagram text-lg"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[8px] font-semibold text-gray-500 tracking-widest uppercase">Instagram</span>
+                                <span class="text-sm font-light text-gray-300 group-hover:text-pink-400 transition-colors">@s.4wayy</span>
+                            </div>
+                        </a>
+
+                        <!-- Facebook -->
+                        <a href="https://web.facebook.com/profile.php?fb_profile_edit_entry_point=%7B%22click_point%22%3A%22edit_profile_button%22%2C%22feature%22%3A%22profile_header%22%7D&id=61587297513267&sk=about" target="_blank" class="glass-card p-5 rounded-xl flex items-center gap-4 hover:border-blue-500/40 transition-all group">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20 group-hover:bg-blue-500/20 transition-all shrink-0">
+                                <i class="fa-brands fa-facebook-f text-base"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[8px] font-semibold text-gray-500 tracking-widest uppercase">Facebook</span>
+                                <span class="text-sm font-light text-gray-300 group-hover:text-blue-400 transition-colors">mei mei</span>
+                            </div>
+                        </a>
+
+                        <!-- X / Twitter -->
+                        <a href="https://x.com/awayouw" target="_blank" class="glass-card p-5 rounded-xl flex items-center gap-4 hover:border-zinc-400/40 transition-all group">
+                            <div class="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center text-zinc-300 border border-white/10 group-hover:bg-white/10 transition-all shrink-0">
+                                <i class="fa-brands fa-x-twitter text-base"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[8px] font-semibold text-gray-500 tracking-widest uppercase">X / Twitter</span>
+                                <span class="text-sm font-light text-gray-300 group-hover:text-white transition-colors">@awayouw</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- LOKASI & CTA CHAT -->
+                    <div class="p-6 glass-card rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 border border-blue-500/20 shrink-0">
+                                <i class="fa-solid fa-location-dot text-base"></i>
+                            </div>
+                            <div>
+                                <span class="block text-[9px] font-semibold text-gray-500 tracking-widest uppercase">Lokasi Sekarang</span>
+                                <span class="font-light text-sm text-gray-300">Sukabumi, Jawa Barat, Indonesia</span>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/6285882366917" target="_blank" class="w-full sm:w-auto px-6 py-3.5 bg-gold-gradient text-neutral-900 text-xs font-semibold uppercase tracking-widest rounded-full hover:opacity-90 transition-all text-center flex items-center justify-center gap-2 shadow-lg shadow-amber-900/10 cursor-pointer">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Chat Sekarang
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer class="w-full text-center text-[9px] font-medium tracking-[0.3em] text-gray-600 py-6 border-t border-zinc-950 mt-8 uppercase">
+            © 2026 Salwa Mutiara. All Rights Reserved.
+        </footer>
+    </div>
+
+    <!-- ENGINE SCRIPTS -->
+    <!-- STREAMING_CHUNK: Writing final script functions for tab-switching and resource fallback -->
+    <script>
+        function switchPage(pageId) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => sec.classList.add('hidden'));
+
+            const activeSec = document.getElementById('page-' + pageId);
+            if (activeSec) activeSec.classList.remove('hidden');
+
+            const buttons = document.querySelectorAll('#navMenu button');
+            buttons.forEach(btn => btn.classList.remove('nav-active'));
+
+            const activeButton = document.getElementById('btn-' + pageId);
+            if (activeButton) activeButton.classList.add('nav-active');
+
+            document.getElementById('dropdownContent').classList.remove('show');
+            if(window.innerWidth < 768) document.getElementById('navMenu').classList.add('hidden');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleDropdown(event) {
+            event.stopPropagation();
+            document.getElementById('dropdownContent').classList.toggle('show');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navMenu').classList.toggle('hidden');
+        }
+
+        // Event listener klik luar untuk dismiss dropdown menu otomatis
+        document.addEventListener('click', function() {
+            const dropdown = document.getElementById('dropdownContent');
+            if (dropdown) {
+                dropdown.classList.remove('show');
+            }
+        });
+
+        // SCRIPT EFEK MENGETIK AUTOMATIS (TYPEWRITER)
+        const txtElement = document.getElementById('typewriter-text');
+        const words = ['Junior Web Developer', 'UI Designer', 'RPL Student'];
+        let txtIndex = 0;
+        let currentWord = '';
+        let isDeleting = false;
+
+        function type() {
+            const index = txtIndex % words.length;
+            const fullTxt = words[index];
+
+            if (isDeleting) {
+                currentWord = fullTxt.substring(0, currentWord.length - 1);
+            } else {
+                currentWord = fullTxt.substring(0, currentWord.length + 1);
+            }
+
+            if (txtElement) {
+                txtElement.innerHTML = currentWord;
+            }
+            
+            let typeSpeed = 150;
+
+            if (isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && currentWord === fullTxt) {
+                typeSpeed = 1500; 
+                isDeleting = true;
+            } else if (isDeleting && currentWord === '') {
+                isDeleting = false;
+                txtIndex++;
+                typeSpeed = 500; 
+            }
+
+            setTimeout(() => type(), typeSpeed);
+        }
+
+        // ==========================================
+        // AUTO-FALLBACK IMAGE DETECTOR (SISTEM ANTI PECAH)
+        // ==========================================
+        function autoHealingResources() {
+            const img1 = document.getElementById('profile-img-1');
+            const img2 = document.getElementById('profile-img-2');
+
+            // List alternatif nama ekstensi foto (antisipasi case-sensitive Windows/Hosting)
+            const fallbackImages = ['salwa.png', 'salwa.PNG', 'salwa.jpg', 'salwa.png.png', 'salwa.PNG.png'];
+            let imgIndex = 0;
+
+            function tryLoadImage() {
+                if (imgIndex >= fallbackImages.length) return;
+                
+                const testImg = new Image();
+                testImg.src = fallbackImages[imgIndex];
+                testImg.onload = () => {
+                    // Jika sukses dimuat, update kedua elemen foto profil
+                    if (img1) img1.src = fallbackImages[imgIndex];
+                    if (img2) img2.src = fallbackImages[imgIndex];
+                };
+                testImg.onerror = () => {
+                    imgIndex++;
+                    tryLoadImage();
+                };
+            }
+            tryLoadImage();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(type, 500);
+            autoHealingResources();
+        });
+    </script>
+</body>
+</html>
